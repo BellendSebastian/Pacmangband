@@ -26,10 +26,10 @@ public class StuffFactory {
 		return fungus;
 	}
 	
-	public Creature newGhost(int depth) {
-		Creature ghost = new Creature(world, 'G', Color.lightGray, 10, 0, 0, "Ghost");
+	public Creature newGhost(int depth, Creature player) {
+		Creature ghost = new Creature(world, 'G', Color.lightGray, 50, 10, 10, "Ghost");
 		world.addAtEmptyLocation(ghost, depth);
-		new GhostAi(ghost);
+		new GhostAi(ghost, player);
 		return ghost;
 	}
 	

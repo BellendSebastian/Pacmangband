@@ -40,7 +40,7 @@ public class PlayScreen implements Screen {
 		player = creatureFactory.newPlayer(messages, fov);
 		for (int z = 0; z < world.depth(); z++) {
 			for (int i = 0; i < 8; i++) {
-				creatureFactory.newGhost(z);
+				creatureFactory.newGhost(z, player);
 			}
 		}
 	}
