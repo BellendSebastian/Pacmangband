@@ -13,6 +13,9 @@ public class Creature {
 	private int defenseValue;
 	private String name;
 	public int visionRadius;
+	private Inventory inventory;
+	private int maxFood;
+	private int food;
 	
 	public int x;
 	public int y;
@@ -28,6 +31,38 @@ public class Creature {
 		this.attackValue = attackValue;
 		this.defenseValue = defenseValue;
 		this.name = name;
+		this.inventory = new Inventory(20);
+		this.maxFood = 1000;
+		this.food = maxFood / 3 * 2;
+	}
+	
+	public int maxFood() {
+		return maxFood;
+	}
+	
+	public int food() {
+		return food;
+	}
+	
+	public void pickup() {
+		Item item = world.item(x, y, z);
+		if (inventory.isFull() || item == null) {
+			doAction("grabs at the ground");
+		} else {
+			doAction("pickup a %s", item.name());
+			world.remove(x, y, z);
+			inventory.add(item);
+		}
+	}
+	
+	public void drop(Item item) {
+		doAction("drop a " + item.name());
+		inventory.remove(item);
+		world.addAtEmptySpace(item, x, y, z);
+	}
+	
+	public Inventory inventory() {
+		return inventory;
 	}
 	
 	public boolean canSee(int wx, int wy, int wz) {
@@ -141,11 +176,38 @@ public class Creature {
 		hp += amount;
 		if (hp < 1) {
 			doAction("die");
+			leaveCorpse();
 			world.remove(this);
 		}
 	}
 	
+	private void leaveCorpse() {
+		Item corpse = new Item('%', color, name + " corpse");
+		corpse.modifyFoodValue(maxHp * 3);
+		world.addAtEmptySpace(corpse, x, y, z);
+	}
+	
+	public void modifyFood(int amount) {
+		food += amount;
+		if (food > maxFood) {
+			food = maxFood + 1;
+			modifyHp(-1);
+		} else if (food < 1 && isPlayer()) {
+			modifyHp(-1000);
+		}
+	}
+	
+	private boolean isPlayer() {
+		return glyph == '@';
+	}
+	
+	public void eat(Item item) {
+		modifyFood(item.foodValue());
+		inventory.remove(item);
+	}
+	
 	public void update() {
+		modifyFood(-1);
 		ai.onUpdate();
 	}
 	
