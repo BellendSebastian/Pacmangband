@@ -1,11 +1,13 @@
 package com.diquebutte.pacmangband.screens;
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.diquebutte.pacmangband.Creature;
 import com.diquebutte.pacmangband.CreatureFactory;
+import com.diquebutte.pacmangband.FieldOfView;
 import com.diquebutte.pacmangband.World;
 import com.diquebutte.pacmangband.WorldBuilder;
 
@@ -18,18 +20,20 @@ public class PlayScreen implements Screen {
 	private int screenHeight;
 	private Creature player;
 	private List<String> messages;
+	private FieldOfView fov;
 	
 	public PlayScreen() {
 		screenWidth = 80;
 		screenHeight = 23;
 		messages = new ArrayList<String>();
 		createWorld();
+		fov = new FieldOfView(world);
 		CreatureFactory cf = new CreatureFactory(world);
 		createCreatures(cf);
 	}
 	
 	private void createCreatures(CreatureFactory creatureFactory) {
-		player = creatureFactory.newPlayer(messages);
+		player = creatureFactory.newPlayer(messages, fov);
 		for (int z = 0; z < world.depth(); z++) {
 			for (int i = 0; i < 8; i++) {
 				creatureFactory.newGhost(z);
@@ -50,16 +54,21 @@ public class PlayScreen implements Screen {
 	}
 	
 	private void displayTiles(AsciiPanel terminal, int left, int top) {
+		fov.update(player.x, player.y, player.z, player.visionRadius());
 		for (int x = 0; x < screenWidth; x++) {
 			for (int y = 0; y < screenHeight; y++) {
 				int wx = x + left;
 				int wy = y + top;
 
-				Creature creature = world.creature(wx, wy, player.z);
-				if (creature != null) {
-					terminal.write(creature.glyph(), creature.x - left, creature.y - top, creature.color());
+				if (player.canSee(wx, wy, player.z)) {
+					Creature creature = world.creature(wx, wy, player.z);
+					if (creature != null) {
+						terminal.write(creature.glyph(), creature.x - left, creature.y - top, creature.color());
+					} else {
+						terminal.write(world.glyph(wx,  wy,  player.z), x, y, world.color(wx, wy, player.z));
+					}
 				} else {
-					terminal.write(world.glyph(wx, wy, player.z), x, y, world.color(wx, wy, player.z));
+					terminal.write(fov.tile(wx, wy, player.z).glyph(), x, y, Color.darkGray);
 				}
 			}
 		}
