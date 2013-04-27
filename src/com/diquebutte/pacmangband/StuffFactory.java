@@ -12,9 +12,14 @@ public class StuffFactory {
 		this.world = world;
 	}
 	
-	public Creature newPlayer(List<String> messages, FieldOfView fov) {
-		Creature player = new Creature(world, '@', AsciiPanel.brightYellow, 100, 20, 10, "Pacman");
+	public Creature newPlayer(List<String> messages, FieldOfView fov, String playerClass) {
+		Creature player = new Creature(world, '@', AsciiPanel.brightYellow, 100, 20, 10, playerClass);
 		player.visionRadius = 5;
+		if (playerClass != "Pacman") {
+			Item bow = new Item('+', AsciiPanel.brightRed, "Ms. Pacman's Bow");
+			bow.modifyDefenseValue(1);
+			player.startingItem(bow);
+		}
 		world.addAtEmptyLocation(player, 0);
 		new PlayerAi(player, messages, fov);
 		return player;

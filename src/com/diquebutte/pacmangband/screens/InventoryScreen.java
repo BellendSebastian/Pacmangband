@@ -11,7 +11,7 @@ public class InventoryScreen extends InventoryBasedScreen {
 
 	@Override
 	protected String getVerb() {
-		return "return";
+		return "Look 'pon yon inventory!";
 	}
 
 	@Override

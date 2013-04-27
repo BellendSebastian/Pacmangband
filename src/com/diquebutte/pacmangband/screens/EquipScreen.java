@@ -11,7 +11,7 @@ public class EquipScreen extends InventoryBasedScreen {
 
 	@Override
 	protected String getVerb() {
-		return "wear or wield";
+		return "What would ye like to wear or wield?";
 	}
 
 	@Override

@@ -24,10 +24,12 @@ public class PlayScreen implements Screen {
 	private List<String> messages;
 	private FieldOfView fov;
 	private Screen subscreen;
+	private String playerClass;
 	
-	public PlayScreen() {
+	public PlayScreen(String playerClass) {
 		screenWidth = 80;
 		screenHeight = 23;
+		this.playerClass = playerClass;
 		messages = new ArrayList<String>();
 		createWorld();
 		fov = new FieldOfView(world);
@@ -37,7 +39,7 @@ public class PlayScreen implements Screen {
 	}
 	
 	private void createCreatures(StuffFactory creatureFactory) {
-		player = creatureFactory.newPlayer(messages, fov);
+		player = creatureFactory.newPlayer(messages, fov, playerClass);
 		for (int z = 0; z < world.depth(); z++) {
 			for (int i = 0; i < 8; i++) {
 				creatureFactory.newGhost(z, player);
@@ -149,6 +151,7 @@ public class PlayScreen implements Screen {
 	        case KeyEvent.VK_E: subscreen = new EatScreen(player); break;
 	        case KeyEvent.VK_W: subscreen = new EquipScreen(player); break;
 	        case KeyEvent.VK_I: subscreen = new InventoryScreen(player); break;
+	        case KeyEvent.VK_C: subscreen = new CharacterScreen(player); break;
 			}
 			switch(key.getKeyChar()) {
 			case 'g':

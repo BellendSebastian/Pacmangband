@@ -90,6 +90,11 @@ public class Creature {
 		return level;
 	}
 	
+	public void startingItem(Item item) {
+		inventory.add(item);
+		equip(item);
+	}
+	
 	public void unequip(Item item) {
 		if (item == null) {
 			return;
@@ -140,7 +145,7 @@ public class Creature {
 		if (inventory.isFull() || item == null) {
 			doAction("grabs at the ground");
 		} else {
-			doAction("pickup a %s", item.name());
+			doAction("pickup %s", item.name());
 			world.remove(x, y, z);
 			inventory.add(item);
 		}
