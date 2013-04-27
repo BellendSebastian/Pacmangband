@@ -18,6 +18,8 @@ public class Creature {
 	private int food;
 	private Item weapon;
 	private Item armour;
+	private int xp;
+	private int level;
 	
 	public int x;
 	public int y;
@@ -36,6 +38,56 @@ public class Creature {
 		this.inventory = new Inventory(20);
 		this.maxFood = 1000;
 		this.food = maxFood / 3 * 2;
+	}
+	
+	public void gainMaxHp() {
+		maxHp += 10;
+		hp += 10;
+		doAction("Health increased.");
+	}
+	
+	public void gainAttackValue() {
+		attackValue += 2;
+		doAction("Attack increased.");
+	}
+	
+	public void gainDefenseValue() {
+		defenseValue += 2;
+		doAction("Defense increased.");
+	}
+	
+	public void gainVision() {
+		visionRadius += 1;
+		doAction("Perception increased.");
+	}
+	
+	public void modifyXp(int amount) {
+		xp += amount;
+		notify("You %s %d xp.", amount < 0 ? "lose" : "gain", amount);
+		while(xp > (int)(Math.pow(level, 1.5) * 20)) {
+			level++;
+			doAction("advance to level %d", level);
+			ai.onGainLevel();
+			modifyHp(level * 2);
+		}
+	}
+	
+	public void gainXp(Creature other) {
+		int amount = other.maxHp
+				+ other.attackValue()
+				+ other.defenseValue()
+				- level * 2;
+		if (amount > 0) {
+			modifyXp(amount);
+		}
+	}
+	
+	public int xp() {
+		return xp;
+	}
+	
+	public int level() {
+		return level;
 	}
 	
 	public void unequip(Item item) {
@@ -210,6 +262,9 @@ public class Creature {
 		other.modifyHp(-amount);
 		notify("You attack the '%s' for %d damage.", other.name, amount);
 		other.notify("The '%s' attacks you for %d damage.", name, amount);
+		if (other.hp < 1) {
+			gainXp(other);
+		}
 	}
 	
 	public void modifyHp(int amount) {

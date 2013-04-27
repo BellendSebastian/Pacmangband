@@ -21,6 +21,10 @@ public class CreatureAi {
 		}
 	}
 	
+	public void onGainLevel() {
+		new LevelUpController().autoLevelUp(creature);
+	}
+	
 	public void wander() {
 		int mx = (int)(Math.random() * 3) - 1;
 		int my = (int)(Math.random() * 3) - 1;
@@ -58,4 +62,5 @@ public class CreatureAi {
 		}
 		return true;
 	}
+
 }
