@@ -16,6 +16,8 @@ public class Creature {
 	private Inventory inventory;
 	private int maxFood;
 	private int food;
+	private Item weapon;
+	private Item armour;
 	
 	public int x;
 	public int y;
@@ -34,6 +36,43 @@ public class Creature {
 		this.inventory = new Inventory(20);
 		this.maxFood = 1000;
 		this.food = maxFood / 3 * 2;
+	}
+	
+	public void unequip(Item item) {
+		if (item == null) {
+			return;
+		}
+		if (item == armour) {
+			doAction("remove a " + item.name());
+			armour = null;
+		} else if (item == weapon) {
+			doAction("remove a " + item.name());
+			weapon = null;
+		}
+	}
+	
+	public void equip(Item item) {
+		if (item.attackValue() == 0 && item.defenseValue() == 0) {
+			return;
+		}
+		
+		if (item.attackValue() >= item.defenseValue()) {
+			unequip(weapon);
+			doAction("wield a " + item.name());
+			weapon = item;
+		} else {
+			unequip(armour);
+			doAction("wear a " + item.name());
+			armour = item;
+		}
+	}
+	
+	public Item weapon() {
+		return weapon;
+	}
+	
+	public Item armour() {
+		return armour;
 	}
 	
 	public int maxFood() {
@@ -58,6 +97,7 @@ public class Creature {
 	public void drop(Item item) {
 		doAction("drop a " + item.name());
 		inventory.remove(item);
+		unequip(item);
 		world.addAtEmptySpace(item, x, y, z);
 	}
 	
@@ -202,8 +242,12 @@ public class Creature {
 	}
 	
 	public void eat(Item item) {
+		if (item.foodValue() < 0) {
+			notify("Ew.");
+		}
 		modifyFood(item.foodValue());
 		inventory.remove(item);
+		unequip(item);
 	}
 	
 	public void update() {
@@ -224,11 +268,15 @@ public class Creature {
 	}
 	
 	public int attackValue() {
-		return attackValue;
+		return attackValue
+				+ (weapon == null ? 0 : weapon.attackValue())
+				+ (armour == null ? 0 : armour.attackValue());
 	}
 	
 	public int defenseValue() {
-		return defenseValue;
+		return defenseValue
+				+ (weapon == null ? 0 : weapon.defenseValue())
+				+ (armour == null ? 0 : armour.defenseValue());
 	}
 	
 	public void notify(String message, Object ... params) {

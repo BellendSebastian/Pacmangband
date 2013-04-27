@@ -52,6 +52,7 @@ public class PlayScreen implements Screen {
 			}
 		}
 		stuffFactory.newMacguffin(world.depth() -1);
+		stuffFactory.debugWeapon(0);
 	}
 	
 	private void createWorld() {
@@ -145,6 +146,7 @@ public class PlayScreen implements Screen {
 	        case KeyEvent.VK_N: player.moveBy(1, 1, 0); break;
 	        case KeyEvent.VK_D: subscreen = new DropScreen(player); break;
 	        case KeyEvent.VK_E: subscreen = new EatScreen(player); break;
+	        case KeyEvent.VK_W: subscreen = new EquipScreen(player); break;
 			}
 			switch(key.getKeyChar()) {
 			case 'g':

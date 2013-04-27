@@ -45,4 +45,11 @@ public class StuffFactory {
 		world.addAtEmptyLocation(item, depth);
 		return item;
 	}
+	
+	public Item debugWeapon(int depth) {
+		Item item = new Item(')', AsciiPanel.white, "Debug Weapon");
+		item.modifyAttackValue(5);
+		world.addAtEmptyLocation(item, depth);
+		return item;
+	}
 }

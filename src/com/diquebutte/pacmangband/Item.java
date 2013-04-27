@@ -7,7 +7,25 @@ public class Item {
 	private Color color;
 	private String name;
 	private int foodValue;
+	private int attackValue;
+	private int defenseValue;
 
+	public int attackValue() {
+		return attackValue;
+	}
+	
+	public void modifyAttackValue(int amount) {
+		attackValue += amount;
+	}
+	
+	public int defenseValue() {
+		return defenseValue;
+	}
+	
+	public void modifyDefenseValue(int amount) {
+		defenseValue += amount;
+	}
+	
 	public void modifyFoodValue(int amount) {
 		foodValue += amount;
 	}
