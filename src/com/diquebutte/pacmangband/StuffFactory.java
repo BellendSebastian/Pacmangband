@@ -13,7 +13,8 @@ public class StuffFactory {
 	}
 	
 	public Creature newPlayer(List<String> messages, FieldOfView fov) {
-		Creature player = new Creature(world, '@', AsciiPanel.brightYellow, 1000, 25, 20, "Pacman");
+		Creature player = new Creature(world, '@', AsciiPanel.brightYellow, 100, 10, 10, "Pacman");
+		player.visionRadius = 5;
 		world.addAtEmptyLocation(player, 0);
 		new PlayerAi(player, messages, fov);
 		return player;
@@ -47,8 +48,8 @@ public class StuffFactory {
 	}
 	
 	public Item debugWeapon(int depth) {
-		Item item = new Item(')', AsciiPanel.white, "Debug Weapon");
-		item.modifyAttackValue(5);
+		Item item = new Item(')', AsciiPanel.white, "Sharpened teeth");
+		item.modifyAttackValue(10);
 		world.addAtEmptyLocation(item, depth);
 		return item;
 	}

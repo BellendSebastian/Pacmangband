@@ -47,7 +47,7 @@ public class PlayScreen implements Screen {
 	
 	private void createItems(StuffFactory stuffFactory) {
 		for (int z = 0; z < world.depth(); z++) {
-			for (int i = 0; i < world.width() * world.height() / 20; i++) {
+			for (int i = 0; i < world.width() * world.height() / 30; i++) {
 				stuffFactory.newPowerpill(z);
 			}
 		}
@@ -56,7 +56,7 @@ public class PlayScreen implements Screen {
 	}
 	
 	private void createWorld() {
-		world = new WorldBuilder(90, 31, 5).makeCaves().build();
+		world = new WorldBuilder(80, 23, 5).makeCaves().build();
 	}
 	
 	public int getScrollX() {
@@ -95,7 +95,7 @@ public class PlayScreen implements Screen {
 		displayTiles(terminal, left, top);
 		displayMessages(terminal, messages);
 		terminal.write(player.glyph(), player.x - left, player.y - top, player.color());
-		String stats = String.format("%3d/%3d hp %3d/%3d hunger: %8s", player.hp(), player.maxHp(), player.food(), player.maxFood(), hunger());
+		String stats = String.format("level:%2d hp:%3d/%3d floor:%d hunger:%3d/%3d %8s", player.level(), player.hp(), player.maxHp(), player.z + 1, player.food(), player.maxFood(), hunger());
 		terminal.write(stats, 1, 23);
 		if (subscreen != null) {
 			subscreen.displayOutput(terminal);
