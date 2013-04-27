@@ -14,21 +14,21 @@ public class CreatureFactory {
 	
 	public Creature newPlayer(List<String> messages) {
 		Creature player = new Creature(world, '@', AsciiPanel.brightYellow, 100, 20, 5, "Pacman");
-		world.addAtEmptyLocation(player);
+		world.addAtEmptyLocation(player, 0);
 		new PlayerAi(player, messages);
 		return player;
 	}
 	
-	public Creature newFungus() {
+	public Creature newFungus(int depth) {
 		Creature fungus = new Creature(world, 'f', AsciiPanel.brightGreen, 10, 0, 0, "Fungus");
-		world.addAtEmptyLocation(fungus);
+		world.addAtEmptyLocation(fungus, depth);
 		new FungusAi(fungus, this);
 		return fungus;
 	}
 	
-	public Creature newGhost() {
+	public Creature newGhost(int depth) {
 		Creature ghost = new Creature(world, 'G', Color.lightGray, 10, 0, 0, "Ghost");
-		world.addAtEmptyLocation(ghost);
+		world.addAtEmptyLocation(ghost, depth);
 		new GhostAi(ghost);
 		return ghost;
 	}
