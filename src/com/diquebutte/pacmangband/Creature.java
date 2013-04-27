@@ -64,7 +64,9 @@ public class Creature {
 	
 	public void moveBy(int mx, int my, int mz) {
         Tile tile = world.tile(x + mx, y + my, z + mz);
-        
+        if (mx == 0 && my == 0 && mz == 0) {
+        	return;
+        }
         if (mz == -1){
             if (tile == Tile.STAIRS_DOWN) {
                 doAction("walk up the stairs to level %d", z + mz + 1);
@@ -88,6 +90,10 @@ public class Creature {
         } else {
             attack(other);
         }
+	}
+	
+	public Creature creature(int wx, int wy, int wz) {
+		return world.creature(wx, wy, wz);
 	}
 	
 	public void doAction(String message, Object ... params) {
