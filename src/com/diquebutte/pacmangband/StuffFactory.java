@@ -13,7 +13,7 @@ public class StuffFactory {
 	}
 	
 	public Creature newPlayer(List<String> messages, FieldOfView fov) {
-		Creature player = new Creature(world, '@', AsciiPanel.brightYellow, 100, 10, 10, "Pacman");
+		Creature player = new Creature(world, '@', AsciiPanel.brightYellow, 100, 20, 10, "Pacman");
 		player.visionRadius = 5;
 		world.addAtEmptyLocation(player, 0);
 		new PlayerAi(player, messages, fov);
