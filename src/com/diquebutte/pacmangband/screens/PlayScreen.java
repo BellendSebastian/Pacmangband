@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.diquebutte.pacmangband.Audio;
 import com.diquebutte.pacmangband.Creature;
 import com.diquebutte.pacmangband.Item;
 import com.diquebutte.pacmangband.StuffFactory;
@@ -25,6 +26,7 @@ public class PlayScreen implements Screen {
 	private FieldOfView fov;
 	private Screen subscreen;
 	private String playerClass;
+	private Audio a;
 	
 	public PlayScreen(String playerClass) {
 		screenWidth = 80;
@@ -36,6 +38,8 @@ public class PlayScreen implements Screen {
 		StuffFactory cf = new StuffFactory(world);
 		createCreatures(cf);
 		createItems(cf);
+		a = new Audio();
+		a.playMidi("start");
 	}
 	
 	private void createCreatures(StuffFactory creatureFactory) {

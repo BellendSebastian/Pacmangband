@@ -13,7 +13,7 @@ public class StuffFactory {
 	}
 	
 	public Creature newPlayer(List<String> messages, FieldOfView fov, String playerClass) {
-		Creature player = new Creature(world, '@', AsciiPanel.brightYellow, 100, 20, 10, playerClass);
+		Creature player = new Creature(world, '@', AsciiPanel.brightYellow, 100, 20, 0, playerClass);
 		player.visionRadius = 5;
 		if (playerClass != "Pacman") {
 			Item bow = new Item('+', AsciiPanel.brightRed, "Ms. Pacman's Bow");

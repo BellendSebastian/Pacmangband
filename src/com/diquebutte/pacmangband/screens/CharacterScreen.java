@@ -14,6 +14,7 @@ public class CharacterScreen implements Screen {
 	}
 	
 	public void displayOutput(AsciiPanel terminal) {
+		terminal.clear();
 		terminal.write("--Equipment--", 1, 1);
 		terminal.write("-------------", 1, 2);
 		if (player.armour() == null) {
@@ -33,6 +34,7 @@ public class CharacterScreen implements Screen {
 		} else {
 			terminal.write(String.format("Weapon: %s", player.weapon().name()), 1, 13);
 		}
+		terminal.writeCenter("Press [escape] to return to the game.", 22);
 		
 	}
 	
