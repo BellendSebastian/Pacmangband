@@ -16,8 +16,8 @@ public class StuffFactory {
 		Creature player = new Creature(world, '@', AsciiPanel.brightYellow, 100, 20, 0, playerClass);
 		player.visionRadius = 5;
 		if (playerClass != "Pacman") {
-			Item bow = new Item('+', AsciiPanel.brightRed, "Ms. Pacman's Bow");
-			bow.modifyDefenseValue(1);
+			Item bow = new Item('+', AsciiPanel.brightRed, "Ms. Pacman's Bow", ItemType.ARMOUR);
+			bow.modifyDefenseValue(0);
 			player.startingItem(bow);
 		}
 		world.addAtEmptyLocation(player, 0);
@@ -40,20 +40,20 @@ public class StuffFactory {
 	}
 	
 	public Item newPowerpill(int depth) {
-		Item powerpill = new Item((char)249, AsciiPanel.brightWhite, "Power Pill");
+		Item powerpill = new Item((char)249, AsciiPanel.brightWhite, "Power Pill", ItemType.FOOD);
 		powerpill.modifyFoodValue(100);
 		world.addAtEmptyLocation(powerpill, depth);
 		return powerpill;
 	}
 	
 	public Item newMacguffin(int depth) {
-		Item item = new Item('*', AsciiPanel.brightYellow, "MacGuffin");
+		Item item = new Item('*', AsciiPanel.brightYellow, "MacGuffin", ItemType.POINTLESS);
 		world.addAtEmptyLocation(item, depth);
 		return item;
 	}
 	
 	public Item debugWeapon(int depth) {
-		Item item = new Item(')', AsciiPanel.white, "Sharpened teeth");
+		Item item = new Item(')', AsciiPanel.white, "Sharpened teeth", ItemType.WEAPON);
 		item.modifyAttackValue(10);
 		world.addAtEmptyLocation(item, depth);
 		return item;

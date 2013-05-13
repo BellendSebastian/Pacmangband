@@ -27,12 +27,12 @@ public enum Tile {
 		this.glyph = glyph;
 		this.color = color;
 	}
-	
-	public boolean isDiggable() {
-		return this == Tile.WALL;
-	}
-	
+
 	public boolean isGround() {
 		return this != WALL && this != BOUNDS;
+	}
+	
+	public boolean isStairs() {
+		return this != STAIRS_DOWN && this != STAIRS_UP;
 	}
 }

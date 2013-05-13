@@ -39,7 +39,7 @@ public class PlayScreen implements Screen {
 		createCreatures(cf);
 		createItems(cf);
 		a = new Audio();
-		a.playMidi("start");
+		a.playMp3("start");
 	}
 	
 	private void createCreatures(StuffFactory creatureFactory) {

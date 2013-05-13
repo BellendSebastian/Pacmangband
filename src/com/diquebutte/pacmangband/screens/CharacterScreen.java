@@ -20,7 +20,7 @@ public class CharacterScreen implements Screen {
 		if (player.armour() == null) {
 			terminal.write("Helm: None", 1, 4);
 		} else {
-			terminal.write(String.format("Helm: %s", player.armour().name()), 1, 4);	
+			terminal.write(String.format("Helm: %s (+%d)", player.armour().name(), player.armour().defenseValue()), 1, 4);	
 		}
 		terminal.write("Necklace: You have no neck", 1, 5);
 		terminal.write("Pauldrons: You have no shoulders", 1, 6);
@@ -32,7 +32,7 @@ public class CharacterScreen implements Screen {
 		if (player.weapon() == null) {
 			terminal.write("Weapon: None", 1, 13);
 		} else {
-			terminal.write(String.format("Weapon: %s", player.weapon().name()), 1, 13);
+			terminal.write(String.format("Weapon: %s (+%d)", player.weapon().name(), player.weapon().attackValue()), 1, 13);
 		}
 		terminal.writeCenter("Press [escape] to return to the game.", 22);
 		

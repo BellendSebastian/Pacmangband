@@ -2,6 +2,7 @@ package com.diquebutte.pacmangband.screens;
 
 import com.diquebutte.pacmangband.Creature;
 import com.diquebutte.pacmangband.Item;
+import com.diquebutte.pacmangband.ItemType;
 
 public class EquipScreen extends InventoryBasedScreen {
 
@@ -16,7 +17,7 @@ public class EquipScreen extends InventoryBasedScreen {
 
 	@Override
 	protected boolean isAcceptable(Item item) {
-		return item.attackValue() > 0 || item.defenseValue() > 0;
+		return item.type() == ItemType.ARMOUR || item.type() == ItemType.WEAPON;
 	}
 
 	@Override

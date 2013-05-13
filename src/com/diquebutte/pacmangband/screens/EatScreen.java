@@ -2,6 +2,7 @@ package com.diquebutte.pacmangband.screens;
 
 import com.diquebutte.pacmangband.Creature;
 import com.diquebutte.pacmangband.Item;
+import com.diquebutte.pacmangband.ItemType;
 
 public class EatScreen extends InventoryBasedScreen {
 
@@ -16,7 +17,7 @@ public class EatScreen extends InventoryBasedScreen {
 
 	@Override
 	protected boolean isAcceptable(Item item) {
-		return item.foodValue() != 0;
+		return item.type() == ItemType.FOOD || item.type() == ItemType.CORPSE;
 	}
 
 	@Override

@@ -69,12 +69,6 @@ public class World {
 		}
 	}
 	
-	public void dig(int x, int y, int z) {
-		if (tile(x, y, z).isDiggable()) {
-			tiles[x][y][z] = Tile.FLOOR;
-		}
-	}
-	
 	public char glyph(int x, int y, int z) {
 		Creature creature = creature(x, y, z);
 		if (creature != null) {
@@ -119,7 +113,7 @@ public class World {
 		do {
 			x = (int)(Math.random() * width);
 			y = (int)(Math.random() * height);
-		} while (!tile(x, y, depth).isGround() || item(x, y, depth) != null);
+		} while (!tile(x, y, depth).isGround() || item(x, y, depth) != null || !tile(x, y, depth).isStairs());
 
 		items[x][y][depth] = item;
 	}

@@ -9,6 +9,11 @@ public class Item {
 	private int foodValue;
 	private int attackValue;
 	private int defenseValue;
+	private ItemType type;
+	
+	public ItemType type() {
+		return type;
+	}
 
 	public int attackValue() {
 		return attackValue;
@@ -46,9 +51,10 @@ public class Item {
 		return name;
 	}
 	
-	public Item(char glyph, Color color, String name) {
+	public Item(char glyph, Color color, String name, ItemType type) {
 		this.glyph = glyph;
 		this.color = color;
 		this.name = name;
+		this.type = type;
 	}
 }

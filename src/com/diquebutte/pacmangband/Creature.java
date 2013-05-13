@@ -109,15 +109,15 @@ public class Creature {
 	}
 	
 	public void equip(Item item) {
-		if (item.attackValue() == 0 && item.defenseValue() == 0) {
+		if (item.type() != ItemType.ARMOUR && item.type() != ItemType.WEAPON && item.type() != ItemType.FOOD) {
 			return;
 		}
 		
-		if (item.attackValue() >= item.defenseValue()) {
+		if (item.type() == ItemType.WEAPON) {
 			unequip(weapon);
 			doAction("wield a " + item.name());
 			weapon = item;
-		} else {
+		} else if (item.type() == ItemType.ARMOUR) {
 			unequip(armour);
 			doAction("wear a " + item.name());
 			armour = item;
@@ -189,11 +189,7 @@ public class Creature {
 	public void setCreatureAi(CreatureAi ai) {
 		this.ai = ai;
 	}
-	
-	public void dig(int wx, int wy, int wz) {
-		world.dig(wx, wy, wz);
-	}
-	
+
 	public void moveBy(int mx, int my, int mz) {
         Tile tile = world.tile(x + mx, y + my, z + mz);
         if (mx == 0 && my == 0 && mz == 0) {
@@ -282,7 +278,7 @@ public class Creature {
 	}
 	
 	private void leaveCorpse() {
-		Item corpse = new Item('%', color, name + " corpse");
+		Item corpse = new Item('%', color, name + " corpse", ItemType.CORPSE);
 		corpse.modifyFoodValue(maxHp * 3);
 		world.addAtEmptySpace(corpse, x, y, z);
 	}
