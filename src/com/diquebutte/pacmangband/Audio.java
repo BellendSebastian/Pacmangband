@@ -17,7 +17,7 @@ import javazoom.jl.player.Player;
 public class Audio {
 	public void playMp3(String filename) {
 		try {
-			InputStream in = getClass().getResourceAsStream(String.format("/assets/sound/%s.mp3", filename));
+			InputStream in = getClass().getResourceAsStream(String.format("assets/sound/%s.mp3", filename));
 			Player player = new Player(in);
 			player.play();
 		} catch (JavaLayerException e) {
