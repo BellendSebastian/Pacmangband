@@ -45,7 +45,7 @@ public class PlayScreen implements Screen {
 	private void createCreatures(StuffFactory creatureFactory) {
 		player = creatureFactory.newPlayer(messages, fov, playerClass);
 		for (int z = 0; z < world.depth(); z++) {
-			for (int i = 0; i < 8; i++) {
+			for (int i = 0; i < 4; i++) {
 				creatureFactory.newGhost(z, player);
 			}
 		}

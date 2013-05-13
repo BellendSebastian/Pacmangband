@@ -34,7 +34,7 @@ public class StuffFactory {
 	
 	public Creature newGhost(int depth, Creature player) {
 		Creature ghost = new Creature(world, 'G', Color.lightGray, 50, 10, 10, "Ghost");
-		world.addAtEmptyLocation(ghost, depth);
+		world.addAtEmptySpawnPoint(ghost, depth);
 		new GhostAi(ghost, player);
 		return ghost;
 	}

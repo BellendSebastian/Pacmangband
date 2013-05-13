@@ -12,14 +12,14 @@ import com.diquebutte.pacmangband.screens.StartScreen;
 
 import asciiPanel.AsciiPanel;
 
-public class ApplicationMain extends JFrame implements KeyListener {
+public class Pacmangband extends JFrame implements KeyListener {
 
 	private static final long serialVersionUID = 1L;
 
 	private AsciiPanel terminal;
 	private Screen screen;
 	
-	public ApplicationMain() {
+	public Pacmangband() {
 		super();
 		terminal = new AsciiPanel();
 		add(terminal);
@@ -48,7 +48,7 @@ public class ApplicationMain extends JFrame implements KeyListener {
 	public void keyTyped(KeyEvent arg0) {}
 	
 	public static void main(String[] args) {
-		ApplicationMain app = new ApplicationMain();
+		Pacmangband app = new Pacmangband();
 		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		app.setVisible(true);
 		Dimension dm = Toolkit.getDefaultToolkit().getScreenSize();

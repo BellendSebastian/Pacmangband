@@ -54,6 +54,8 @@ public class WorldBuilder {
 						tiles[x][y][z] = Tile.WALL;
 					} else if (temp[y][x] == 0) {
 						tiles[x][y][z] = Tile.FLOOR;
+					} else if (temp[y][x] == 9) {
+						tiles[x][y][z] = Tile.SPAWN;
 					}
 				}
 			}

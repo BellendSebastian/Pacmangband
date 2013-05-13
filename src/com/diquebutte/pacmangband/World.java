@@ -106,6 +106,19 @@ public class World {
 		creatures.add(creature);
 	}
 	
+	public void addAtEmptySpawnPoint(Creature creature, int z) {
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+				if (!tile(x, y, z).isSpawn() && creature(x, y, z) == null) {
+					creature.x = x;
+					creature.y = y;
+					creature.z = z;
+					creatures.add(creature);	
+				}
+			}
+		}
+	}
+	
 	public void addAtEmptyLocation(Item item, int depth) {
 		int x;
 		int y;

@@ -10,6 +10,7 @@ public enum Tile {
 	BOUNDS('x', AsciiPanel.brightBlack),
 	STAIRS_DOWN('>', AsciiPanel.white),
 	STAIRS_UP('<', AsciiPanel.white),
+	SPAWN('.', AsciiPanel.red),
 	UNKNOWN(' ', AsciiPanel.white);
 	
 	private char glyph;
@@ -30,6 +31,10 @@ public enum Tile {
 
 	public boolean isGround() {
 		return this != WALL && this != BOUNDS;
+	}
+	
+	public boolean isSpawn() {
+		return this != SPAWN;
 	}
 	
 	public boolean isStairs() {
