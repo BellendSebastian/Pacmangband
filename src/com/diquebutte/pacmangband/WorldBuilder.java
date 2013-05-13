@@ -27,7 +27,7 @@ public class WorldBuilder {
 	
 	private int[][] loadMapFromFile(int level) {
 		int floor[][] = new int[height][width];
-		InputStream in = getClass().getResourceAsStream(String.format("/assets/maps/level%d", level));
+		InputStream in = getClass().getResourceAsStream(String.format("/maps/level%d", level));
 		try (BufferedReader br = new BufferedReader(new InputStreamReader(in))) {
 			String line;
 			int y = 0;

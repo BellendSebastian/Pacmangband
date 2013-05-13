@@ -17,7 +17,7 @@ import javazoom.jl.player.Player;
 public class Audio {
 	public void playMp3(String filename) {
 		try {
-			InputStream in = getClass().getResourceAsStream(String.format("assets/sound/%s.mp3", filename));
+			InputStream in = getClass().getResourceAsStream(String.format("/sound/%s.mp3", filename));
 			Player player = new Player(in);
 			player.play();
 		} catch (JavaLayerException e) {
@@ -27,7 +27,7 @@ public class Audio {
 	
 	public void playMidi(String filename) {
 		try {
-			Sequence sequence = MidiSystem.getSequence(new File(String.format("assets/music/%s.mid", filename)));
+			Sequence sequence = MidiSystem.getSequence(new File(String.format("/music/%s.mid", filename)));
 			Sequencer sequencer = MidiSystem.getSequencer();
 			sequencer.open();
 			sequencer.setSequence(sequence);
