@@ -1,9 +1,8 @@
 package com.diquebutte.pacmangband;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 
 import javax.sound.midi.InvalidMidiDataException;
@@ -17,13 +16,10 @@ import javazoom.jl.player.Player;
 
 public class Audio {
 	public void playMp3(String filename) {
-		FileInputStream fis;
 		try {
-			fis = new FileInputStream(String.format("assets/sound/%s.mp3", filename));
-			Player player = new Player(fis);
+			InputStream in = getClass().getResourceAsStream(String.format("/assets/sound/%s.mp3", filename));
+			Player player = new Player(in);
 			player.play();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (JavaLayerException e) {
 			e.printStackTrace();
 		}

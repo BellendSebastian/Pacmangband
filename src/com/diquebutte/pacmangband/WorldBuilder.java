@@ -1,8 +1,9 @@
 package com.diquebutte.pacmangband;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -26,7 +27,8 @@ public class WorldBuilder {
 	
 	private int[][] loadMapFromFile(int level) {
 		int floor[][] = new int[height][width];
-		try (BufferedReader br = new BufferedReader(new FileReader("assets/maps/level" + level))) {
+		InputStream in = getClass().getResourceAsStream(String.format("/assets/maps/level%d", level));
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(in))) {
 			String line;
 			int y = 0;
 			while ((line = br.readLine()) != null) {
